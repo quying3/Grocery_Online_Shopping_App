@@ -158,7 +158,7 @@ class CustomerRepository {
         if (cartItems.length > 0) {
           let isExist = false;
           cartItems.map((item) => {
-            if (item.product._id.toString() === product._id.toString()) {
+            if (item.product._id.toString() === _id.toString()) {
               if (isRemove) {
                 cartItems.splice(cartItems.indexOf(item), 1);
               } else {
@@ -194,6 +194,7 @@ class CustomerRepository {
 
   async AddOrderToProfile(customerId, order) {
     try {
+      console.log("AddOrderToProfile");
       const profile = await CustomerModel.findById(customerId);
 
       if (profile) {
@@ -201,6 +202,8 @@ class CustomerRepository {
           profile.orders = [];
         }
         profile.orders.push(order);
+
+        console.log("orders:", profile.orders);
 
         profile.cart = [];
 
